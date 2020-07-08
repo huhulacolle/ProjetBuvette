@@ -1,12 +1,4 @@
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Connexion Buvettes</title>
-            <meta charset="utf-8">
-            <link rel="stylesheet" href="cours.css">
-        </head>
-        <body>
-            <?php 
+<?php 
 		$user = 'root'; 
 		$pass = ''; 
 		// Data Source Name 
@@ -17,6 +9,5 @@
 	} catch (PDOException $e){ 
 		print "Erreur ! :" . $e->getMessage() . "<br/>"; 
 	die(); 
-} ?>        
-        </body>
-    </html>
+} 
+    ?>        
