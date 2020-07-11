@@ -24,6 +24,6 @@
 </nav>
 <script type="text/javascript"> //empêche le clique droit 
     //<!--
-        ///document.oncontextmenu = new Function("return false"); 
+        document.oncontextmenu = new Function("return false"); 
     //-->
     </script>

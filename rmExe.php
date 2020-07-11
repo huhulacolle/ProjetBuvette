@@ -18,15 +18,15 @@ if ($_POST['choix'] == 1) {
     echo '</li>';
     echo '</ul>';
 
-    include('Connect.php'); 
+    include('connect.php'); 
      if ($_POST['amin'] > $_POST['amax']) {
         echo '<br> <br> <br> <br> <br> <br>';
     echo "<center> <h2><strong> Erreur : </strong> Âge Maximal inferieur à l'âge minimal </h2> </center>";
 
     }
     else {
-$sql =  'SELECT DISTINCT V.nomV FROM buvette, estpresent
-E INNER JOIN volontaire V ON E.idV = V.idV
+$sql =  'SELECT DISTINCT V.nomV FROM Buvette, EstPresent
+E INNER JOIN Volontaire V ON E.idV = V.idV
 and age between '.$_POST['amin'].' and '.$_POST['amax'].'';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -61,9 +61,9 @@ if ($_POST['choix'] == 2) {
     echo '</li>';
     echo '</ul>';
     
-    include('Connect.php'); 
-    $sql =  'SELECT DISTINCT V.nomV FROM buvette, estpresent
-    E INNER JOIN volontaire V ON E.idV = V.idV
+    include('connect.php'); 
+    $sql =  'SELECT DISTINCT V.nomV FROM Buvette, EstPresent
+    E INNER JOIN Volontaire V ON E.idV = V.idV
     WHERE nomV like "%'.$_POST['nomV'].'"';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -102,8 +102,8 @@ if ($_POST['choix'] == 3) {
     echo '</li>';
     echo '</ul>';
     
-    include('Connect.php'); 
-    $sql =  'select distinct V.nomV as Vnom from estpresent E INNER JOIN Volontaire V ON E.idV = V.idV GROUP BY E.idV HAVING COUNT(idB) >= '.$_POST['particip'].'';
+    include('connect.php'); 
+    $sql =  'SELECT distinct V.nomV AS Vnom FROM EstPresent E INNER JOIN Volontaire V ON E.idV = V.idV GROUP BY E.idV HAVING COUNT(idB) >= '.$_POST['particip'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
     if ($result == NULL)
@@ -137,8 +137,8 @@ if ($_POST['choix'] == 4) {
     echo '</ul>';
     
     if ($_POST['particip'] == 1 ) {
-        include('Connect.php'); 
-        $sql =  'SELECT nomV FROM volontaire, buvette WHERE volontaire.idV = buvette.responsable GROUP BY nomV;';
+        include('connect.php'); 
+        $sql =  'SELECT nomV FROM Volontaire, Buvette WHERE Volontaire.idV = Buvette.Responsable GROUP BY nomV;';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         if ($result == NULL)
@@ -162,8 +162,8 @@ if ($_POST['choix'] == 4) {
         }
     }
 else {
-    include('Connect.php'); 
-        $sql =  'SELECT DISTINCT t1.nomV as "nomV" FROM volontaire t1 LEFT JOIN buvette t2 ON t2.responsable = t1.idV WHERE t2.responsable IS NULL';
+    include('connect.php'); 
+        $sql =  'SELECT DISTINCT t1.nomV as "nomV" FROM Volontaire t1 LEFT JOIN Buvette t2 ON t2.Responsable = t1.idV WHERE t2.Responsable IS NULL';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         if ($result == NULL)

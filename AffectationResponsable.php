@@ -29,8 +29,8 @@ include_once('nav.php');
 <div class="form-group">
     <select class="form-control" name="idB">
 <?php
-include_once('Connect.php'); 
-$sql =  'SELECT idB, nomB FROM buvette';
+include_once('connect.php'); 
+$sql =  'SELECT idB, nomB FROM Buvette';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 
@@ -46,8 +46,8 @@ echo '<option value="'.$row['idB'].'">'; echo $row['nomB']; echo '</option>';
 <div class="form-group">
     <select class="form-control" name="idV">
 <?php
-include_once('Connect.php'); 
-$sql =  'SELECT idV, nomV FROM volontaire';
+include_once('connect.php'); 
+$sql =  'SELECT idV, nomV FROM Volontaire';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 
@@ -63,8 +63,8 @@ echo '<option value="'.$row['idV'].'">'; echo $row['nomV']; echo '</option>';
 <div class="form-group">
     <select class="form-control" name="idM">
 <?php
-include_once('Connect.php'); 
-$sql =  'SELECT idM, eqA, eqB FROM matchs';
+include_once('connect.php'); 
+$sql =  'SELECT idM, eqA, eqB FROM Matchs';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 

@@ -17,8 +17,8 @@ include_once('nav.php');
         </ul>
 <?php
 echo '<br>';
-include_once('Connect.php'); 
-$sql =  'SELECT idB FROM estouverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
+include_once('connect.php'); 
+$sql =  'SELECT idB FROM EstOuverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 if ($result == NULL) {
@@ -28,13 +28,13 @@ if ($result == NULL) {
         <?php
 }
 else {
-    $sql =  'SELECT nomB FROM buvette WHERE idB = '.$_POST['idB'].'';
+    $sql =  'SELECT nomB FROM Buvette WHERE idB = '.$_POST['idB'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row){ 
         $idB = $row['nomB'];
     }
-    $sql =  'SELECT eqA, eqB FROM matchs WHERE idM = '.$_POST['idM'].'';
+    $sql =  'SELECT eqA, eqB FROM Matchs WHERE idM = '.$_POST['idM'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row){ 

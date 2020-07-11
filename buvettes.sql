@@ -16,9 +16,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table Buvette
 --
-drop database if exists Buvettes;
-create database Buvettes;
-use Buvettes;
+
 CREATE TABLE Buvette 
 (
   idB int(11) NOT NULL,

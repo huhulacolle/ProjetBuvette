@@ -33,8 +33,8 @@ echo '<input name="idM" type="hidden" value="'.$_POST['idM'].'">';
 <div class="form-group">
     <select class="form-control" name="idB">
 <?php
-include_once('Connect.php'); 
-$sql =  'select E.idB, B.nomB FROM Buvette B, EstOuverte E WHERE E.idB = B.idB AND idM='.$_POST['idM'].'';
+include_once('connect.php'); 
+$sql =  'SELECT E.idB, B.nomB FROM Buvette B, EstOuverte E WHERE E.idB = B.idB AND idM='.$_POST['idM'].'';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 
@@ -50,8 +50,8 @@ echo ' <option value="'.$row['idB'].'">'; echo $row['nomB']; echo '</option>';
 <div class="form-group">
     <select class="form-control" name="idV">
 <?php
-include_once('Connect.php'); 
-$sql =  'SELECT idV, nomV FROM volontaire';
+include_once('connect.php'); 
+$sql =  'SELECT idV, nomV FROM Volontaire';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 
