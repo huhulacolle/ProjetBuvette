@@ -127,7 +127,7 @@ if ($_POST['choix'] == 2) {
       echo '<tbody>';
       echo '<tr>';
             echo '<td>'; echo  $row['idM']; echo '</td>';
-            echo '<td>'; echo '<input type="date" value="'.$row['dateM'].'">'; echo '</td>';
+            echo '<td>'; echo  $row['dateM']; echo '</td>';
             echo '<td>'; echo $row['eqA']; echo '</td>';
             echo '<td>'; echo  $row['eqB']; echo '</td>';
             echo '<td>'; echo  $row['scoreA']; echo '</td>';
