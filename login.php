@@ -21,7 +21,7 @@ include_once('nav.php');
       <body class="text-center">
         <form class="form-signin" method="post" action="admin.php" />
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="pass" class="form-control" placeholder="mot de passe" required>
+        <input type="password" name="pass" class="form-control" value="admins" placeholder="mot de passe" required>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">se connecter</button>
     </div>
