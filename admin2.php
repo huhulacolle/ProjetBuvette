@@ -23,7 +23,7 @@ if ($_POST['choix'] == 1) {
     ?>  
 <input type="hidden" name="choix" value=1>
 <?php
-include_once('connect.php');
+include_once('Connect.php');
     $sql =  'SELECT MAX(idV) as idV from volontaire';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -62,13 +62,13 @@ foreach ($result as $row) {
 <tr>
     <td>
         <?php
-            echo $max;
+            echo '<input type=text class="form-control" value="'.$max.'"readonly>';
         ?>
     </td>
     <form action="adminExe.php">
     <input type="hidden" name="mod" value="Inserer">
     <td>
-        <input type="text" name="nomV">
+        <input type="text" class="form-control" name="nomV">
     </td>
     <td>
         <?php
@@ -95,7 +95,7 @@ if ($_POST['choix'] == 2) {
   ?>  
   <input type="hidden" name="choix" value=2>
   <?php
-  include_once('connect.php');
+  include_once('Connect.php');
       $sql =  'SELECT MAX(idM) as idM from matchs';
       $sth = $dbh->query($sql); 
       $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -146,13 +146,13 @@ if ($_POST['choix'] == 2) {
   <tr>
       <td>
           <?php
-              echo $max;
+              echo '<input type=text class="form-control" value="'.$max.'"readonly>';
           ?>
       </td>
       <form action="adminExe.php">
       <input type="hidden" name="mod" value="Inserer">
       <td>
-          <input type="date" name="dateM">
+          <input type="date" class="form-control" name="dateM">
       </td>
       <td>
   <div class="form-group">
@@ -185,10 +185,10 @@ if ($_POST['choix'] == 2) {
   </div>
   </td>
       <td>
-      <input type="text" value="NULL" name="scoreA">       
+      <input type="number" class="form-control" name="scoreA">       
       </td>
       <td>
-      <input type="text" value="NULL" name="scoreB">       
+      <input type="number" class="form-control" name="scoreB">       
       </td>
       <td colspan="2">
       <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
@@ -204,7 +204,7 @@ if ($_POST['choix'] == 3) {
   ?>  
   <input type="hidden" name="choix" value=3>
   <?php
-  include_once('connect.php');
+  include_once('Connect.php');
       $sql =  'SELECT MAX(idB) as idB from buvette';
       $sth = $dbh->query($sql); 
       $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -245,16 +245,16 @@ if ($_POST['choix'] == 3) {
   <tr>
       <td>
           <?php
-              echo $max;
+              echo '<input type=text class="form-control" value="'.$max.'"readonly>';
           ?>
       </td>
       <form action="adminExe.php">
       <input type="hidden" name="mod" value="Inserer">
   <td>
-  <input type="text" name="nomB">   
+  <input type="text" class="form-control" name="nomB">   
   </td>
       <td>
-      <input type="text" name="emplacement">       
+      <input type="text" class="form-control" name="emplacement">       
       </td>
       <td>
         <?php

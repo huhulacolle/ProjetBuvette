@@ -28,14 +28,7 @@ if ($_POST['choix'] == 1) {
       <td>
     <div class="form-group">
     <label for="exampleFormControlSelect1">Age Minimal :</label>
-    <select class="form-control" name="amin">
-      <?php
-      for ($i=1; $i <= 99 ; $i++) { 
-        echo "<option>";
-        echo $i;
-        echo "</option>";
-      }
-      ?>
+    <input type="number" class="form-control" name="amin">
     </select>
   </div>
       </td>
@@ -45,14 +38,7 @@ if ($_POST['choix'] == 1) {
       <td> 
       <div class="form-group">
     <label for="exampleFormControlSelect1">Age Maximal :</label>
-    <select class="form-control" name="amax">
-      <?php
-      for ($i=1; $i <= 99 ; $i++) { 
-        echo "<option>";
-        echo $i;
-        echo "</option>";
-      }
-      ?>
+    <input type="number" class="form-control" name="amax">
     </select>
   </div>
   </div>
@@ -97,7 +83,7 @@ if ($_POST['choix'] == 2) {
   </tbody>
 </table>
 </div>
-<?php } ?>
+<?php } ?> 
 <?php
 if ($_POST['choix'] == 3) {
     ?>  
@@ -114,15 +100,7 @@ if ($_POST['choix'] == 3) {
     <td>
     <div class="form-group">
     <label for="exampleFormControlSelect1">Participations <br> minimal :</label>
-    <select class="form-control" name="particip">
-      <?php
-      for ($i=0; $i <= 99 ; $i++) { 
-        echo "<option>";
-        echo $i;
-        echo "</option>";
-      }
-      ?>
-    </select>
+    <input type="number" class="form-control" name="particip">
   </div>
   </tbody>
 </table>

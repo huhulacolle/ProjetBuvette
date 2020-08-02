@@ -1,20 +1,19 @@
 <?php
 
 function affichematch ($idM) {
-require'connect.php';
+require'Connect.php';
 $i = 0;
 
 $sql = 'SELECT COUNT(idB) AS ddb from estouverte group by idM';
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 foreach ($result as $row){ 
-
        $ddb[$i] = $row['ddb'];
        $i++;
 }
 
 $i = 0;
-$sql = 'select count(DISTINCT idV) AS ddv from estpresent group by idM';
+$sql = 'SELECT count(DISTINCT idV) AS ddv FROM estpresent GROUP BY idM';
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 foreach ($result as $row){ 
@@ -62,7 +61,7 @@ $dbh=NULL;
 }
 
 function TopVolon ($idV) {
-	require'connect.php';
+	require'Connect.php';
 $sql=('SELECT V.idV,Age,NomV,COUNT(DISTINCT idm) FROM estpresent P, VOLONTAIRE V WHERE V.IDV=P.IDV GROUP BY idV ORDER BY 4 DESC LIMIT 5;');
    $sth = $dbh->query($sql);
    $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -89,7 +88,7 @@ $sql=('SELECT V.idV,Age,NomV,COUNT(DISTINCT idm) FROM estpresent P, VOLONTAIRE V
    $dbh=NULL; 
 }
 function TopBuv ($idB) {
-	require'connect.php';
+	require'Connect.php';
 $sql=('SELECT E.idB, nomB, emplacement,COUNT(DISTINCT E.idV) FROM EstPresent E, Buvette B WHERE B.idB = E.idB GROUP BY E.idB,nomB,emplacement ORDER BY COUNT( E.idV) DESC LIMIT 5; ');
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -116,7 +115,7 @@ echo '<tr>';
 }
 
 function StatMatch($idB) {
-		require'connect.php';
+		require'Connect.php';
 			 if ($_POST['buvOpen'] == NULL)
    {
       echo "Erreur : aucun Match n'a était saisi";

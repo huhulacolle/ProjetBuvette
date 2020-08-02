@@ -67,7 +67,15 @@ if ($_POST['choix'] == 2) {
         }
         
         $max = $max + 1;
-        $sql='Insert Into matchs (idM, dateM, eqA, eqB, scoreA, scoreB) Values ('.$max.',"'.$_POST['dateM'].'","'.$_POST['eqA'].'","'.$_POST['eqB'].'",'.$_POST['scoreA'].','.$_POST['scoreB'].');';
+        $scoreA = $_POST['scoreA'];
+        $scoreB = $_POST['scoreB'];
+        if ($scoreA == NULL) {
+            $scoreA = "NULL";
+        }
+        if ($scoreB == NULL) {
+            $scoreB = "NULL";
+        }
+        $sql='Insert Into matchs (idM, dateM, eqA, eqB, scoreA, scoreB) Values ('.$max.',"'.$_POST['dateM'].'","'.$_POST['eqA'].'","'.$_POST['eqB'].'",'.$scoreA.','.$scoreB.');';
         $sth = $dbh->query($sql);
     echo '</div>';
     }
