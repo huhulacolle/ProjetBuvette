@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buvette</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-
 <body>
-    <?php
+<?php
 include('nav.php');
 
 if ($_POST['choix'] == 1) {
@@ -23,7 +20,7 @@ if ($_POST['choix'] == 1) {
     echo '</form>';
     if ($_POST['mod']== "Inserer") {
     
-        include('connect.php'); 
+        include('Connect.php'); 
         $sql =  'SELECT MAX(idV) as idV FROM Volontaire;';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -37,19 +34,17 @@ if ($_POST['choix'] == 1) {
     echo '</div>';
     }
     else if ($_POST['mod']== "Modifier") {
-        include('connect.php');         
+        include('Connect.php');         
         $sql='UPDATE Volontaire SET nomV = "'.$_POST['nomV'].'", age = "'.$_POST['age'].'" WHERE idV = '.$_POST['idV'].'';
         $sth = $dbh->query($sql);
     echo '</div>';
 
     }
     ?>
-    <form name="admin2" action="admin2.php" method="post">
-        <input type="hidden" name="choix" value=1>
-        <script>
-            setTimeout("document.forms['admin2'].submit()", 0);
-        </script>
-    </form>
+        <form name="admin2" action="admin2.php" method="post">
+            <input type="hidden" name="choix" value=1>
+            <script> setTimeout("document.forms['admin2'].submit()", 0); </script>
+        </form>
     <?php
 
 }
@@ -63,7 +58,7 @@ if ($_POST['choix'] == 2) {
     echo '</form>';
     if ($_POST['mod']== "Inserer") {
     
-        include('connect.php'); 
+        include('Connect.php'); 
         $sql =  'SELECT MAX(idM) as idM FROM Matchs;';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -72,13 +67,21 @@ if ($_POST['choix'] == 2) {
         }
         
         $max = $max + 1;
-        $sql='Insert Into Matchs (idM, dateM, eqA, eqB, scoreA, scoreB) Values ('.$max.',"'.$_POST['dateM'].'","'.$_POST['eqA'].'","'.$_POST['eqB'].'",'.$_POST['scoreA'].','.$_POST['scoreB'].');';
+        $scoreA = $_POST['scoreA'];
+        $scoreB = $_POST['scoreB'];
+        if ($scoreA == NULL) {
+            $scoreA = "NULL";
+        }
+        if ($scoreB == NULL) {
+            $scoreB = "NULL";
+        }
+        $sql='Insert Into Matchs (idM, dateM, eqA, eqB, scoreA, scoreB) Values ('.$max.',"'.$_POST['dateM'].'","'.$_POST['eqA'].'","'.$_POST['eqB'].'",'.$scoreA.','.$scoreB.');';
         $sth = $dbh->query($sql);
     echo '</div>';
     }
     else if ($_POST['mod']== "Modifier") {
         $i = 0;
-        include('connect.php');         
+        include('Connect.php');         
         $scoreA = $_POST['scoreA'];
         $scoreB = $_POST['scoreB'];
         if ($scoreA == NULL) {
@@ -95,11 +98,9 @@ if ($_POST['choix'] == 2) {
     ?>
     <form name="admin2" action="admin2.php" method="post">
         <input type="hidden" name="choix" value=2>
-        <script>
-            setTimeout("document.forms['admin2'].submit()", 0);
-        </script>
+        <script> setTimeout("document.forms['admin2'].submit()", 0); </script>
     </form>
-    <?php
+<?php
     
 }
 if ($_POST['choix'] == 3) {
@@ -112,7 +113,7 @@ if ($_POST['choix'] == 3) {
     echo '</form>';
     if ($_POST['mod']== "Inserer") {
     
-        include('connect.php'); 
+        include('Connect.php'); 
         $sql =  'SELECT MAX(idB) as idB from Buvette';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
@@ -126,7 +127,7 @@ if ($_POST['choix'] == 3) {
     echo '</div>';
     }
     else if ($_POST['mod']== "Modifier") {
-        include('connect.php');         
+        include('Connect.php');         
         $sql='UPDATE Buvette SET nomB = "'.$_POST['nomB'].'", emplacement = "'.$_POST['emplacement'].'", responsable = "'.$_POST['responsable'].'" WHERE idB = '.$_POST['idB'].'';
         $sth = $dbh->query($sql);
     echo '</div>';
@@ -135,23 +136,14 @@ if ($_POST['choix'] == 3) {
     ?>
     <form name="admin2" action="admin2.php" method="post">
         <input type="hidden" name="choix" value=3>
-        <script>
-            setTimeout("document.forms['admin2'].submit()", 0);
-        </script>
+        <script> setTimeout("document.forms['admin2'].submit()", 0); </script>
     </form>
-    <?php
+<?php
 }
 
 ?>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
 </body>
-
 </html>

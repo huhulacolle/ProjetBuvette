@@ -25,7 +25,7 @@ echo '<br>';
 echo '<div class="mx-auto" style="width: 600px;">';
 if ($_POST['choix'] == NULL)
 {
-   echo "Erreur : aucune option n'a était saisi";
+   echo " <center> <h3> <strong> Erreur : aucune option n'a était saisi </strong> </h3> </center> ";
 }
 else if ($_POST['choix'] == 0)
 {
