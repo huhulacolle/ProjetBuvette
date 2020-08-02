@@ -29,7 +29,7 @@ include_once('nav.php');
     <select class="form-control" name="idM">
 <?php
 include_once('Connect.php'); 
-$sql =  'SELECT idM, e1.pays AS p1, e2.pays AS p2 FROM matchs, equipe AS e1, equipe AS e2 WHERE matchs.eqA = e1.idE AND matchs.eqB = e2.idE;';
+$sql =  'SELECT idM, e1.pays AS p1, e2.pays AS p2 FROM Matchs, Equipe AS e1, Equipe AS e2 WHERE Matchs.eqA = e1.idE AND Matchs.eqB = e2.idE;';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 
@@ -47,7 +47,7 @@ echo '<option value="'.$row['idM'].'">'; echo $row['p1']; echo ' vs '; echo $row
     <select class="form-control" name="idB">
 <?php
 include_once('Connect.php'); 
-$sql =  'SELECT idB, nomB FROM buvette';
+$sql =  'SELECT idB, nomB FROM Buvette';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 

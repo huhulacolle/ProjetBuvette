@@ -11,7 +11,7 @@
 include_once('nav.php');
 echo '<br>';
 include_once('Connect.php'); 
-$sql =  'SELECT idB FROM estouverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
+$sql =  'SELECT idB FROM EstOuverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 if ($result == NULL) {
@@ -26,7 +26,7 @@ if ($result == NULL) {
         <?php
 }
 else {
-    $sql='UPDATE buvette SET responsable = '.$_POST['idV'].' WHERE buvette.responsable=volontaire.idV';
+    $sql='UPDATE Buvette SET Responsable = '.$_POST['idV'].' WHERE Buvette.Responsable=Volontaire.idV';
     $sth = $dbh->query($sql);
     ?>
     <br> <br> <br>

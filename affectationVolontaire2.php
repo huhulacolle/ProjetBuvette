@@ -51,7 +51,7 @@ echo ' <option value="'.$row['idB'].'">'; echo $row['nomB']; echo '</option>';
     <select class="form-control" name="idV">
 <?php
 include_once('Connect.php'); 
-$sql =  'SELECT idV, nomV FROM volontaire';
+$sql =  'SELECT idV, nomV FROM Volontaire';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 foreach ($result as $row){ 

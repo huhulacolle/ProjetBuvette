@@ -12,7 +12,7 @@ volontaire <br>
 include_once('nav.php');
 echo '<br>';
 include_once('Connect.php'); 
-$sql =  'SELECT idB FROM estouverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
+$sql =  'SELECT idB FROM EstOuverte WHERE idM = '.$_POST['idM'].' AND idB = '.$_POST['idB'].'';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
 

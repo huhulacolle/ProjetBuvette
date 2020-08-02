@@ -37,7 +37,7 @@
       </thead>
     <?php
     include_once('Connect.php'); 
-    $sql =  'SELECT * FROM volontaire WHERE idV = '.$_POST['idV'].'';
+    $sql =  'SELECT * FROM Volontaire WHERE idV = '.$_POST['idV'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $row){ 
@@ -80,7 +80,7 @@
       </thead>
     <?php
     include_once('Connect.php'); 
-    $sql =  'SELECT * FROM matchs WHERE idM = '.$_POST['idM'].'';
+    $sql =  'SELECT * FROM Matchs WHERE idM = '.$_POST['idM'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $row){ 
@@ -124,7 +124,7 @@
       </thead>
     <?php
     include_once('Connect.php'); 
-    $sql =  'SELECT * FROM buvette WHERE idB = '.$_POST['idB'].'';
+    $sql =  'SELECT * FROM Buvette WHERE idB = '.$_POST['idB'].'';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $row){ 

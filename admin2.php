@@ -24,7 +24,7 @@ if ($_POST['choix'] == 1) {
 <input type="hidden" name="choix" value=1>
 <?php
 include_once('Connect.php');
-    $sql =  'SELECT MAX(idV) as idV from volontaire';
+    $sql =  'SELECT MAX(idV) as idV from Volontaire';
     $sth = $dbh->query($sql); 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
     foreach ($result as $row){ 
@@ -45,7 +45,7 @@ include_once('Connect.php');
   </thead>
 <?php
 include_once('Connect.php'); 
-$sql =  'SELECT * FROM volontaire';
+$sql =  'SELECT * FROM Volontaire';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 foreach ($result as $row) {
@@ -96,7 +96,7 @@ if ($_POST['choix'] == 2) {
   <input type="hidden" name="choix" value=2>
   <?php
   include_once('Connect.php');
-      $sql =  'SELECT MAX(idM) as idM from matchs';
+      $sql =  'SELECT MAX(idM) as idM from Matchs';
       $sth = $dbh->query($sql); 
       $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
       foreach ($result as $row){ 
@@ -120,7 +120,7 @@ if ($_POST['choix'] == 2) {
     </thead>
   <?php
   include_once('Connect.php'); 
-  $sql =  'SELECT idM, dateM,  e1.pays AS eqA, e2.pays AS eqB, scoreA, scoreB FROM matchs, equipe AS e1, equipe AS e2 WHERE matchs.eqA = e1.idE AND matchs.eqB = e2.idE;';
+  $sql =  'SELECT idM, dateM,  e1.pays AS eqA, e2.pays AS eqB, scoreA, scoreB FROM Matchs, Equipe AS e1, Equipe AS e2 WHERE Matchs.eqA = e1.idE AND Matchs.eqB = e2.idE;';
   $sth = $dbh->query($sql); 
   $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
   foreach ($result as $row) {
@@ -159,7 +159,7 @@ if ($_POST['choix'] == 2) {
     <select class="form-control" name="eqA">
   <?php
        include_once('Connect.php'); 
-       $sql =  'SELECT idE, pays FROM equipe;';
+       $sql =  'SELECT idE, pays FROM Equipe;';
        $sth = $dbh->query($sql); 
        $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
        foreach ($result as $row) {
@@ -174,7 +174,7 @@ if ($_POST['choix'] == 2) {
     <select class="form-control" name="eqB">
   <?php
        include_once('Connect.php'); 
-       $sql =  'SELECT idE, pays FROM equipe;';
+       $sql =  'SELECT idE, pays FROM Equipe;';
        $sth = $dbh->query($sql); 
        $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
        foreach ($result as $row) {
@@ -205,7 +205,7 @@ if ($_POST['choix'] == 3) {
   <input type="hidden" name="choix" value=3>
   <?php
   include_once('Connect.php');
-      $sql =  'SELECT MAX(idB) as idB from buvette';
+      $sql =  'SELECT MAX(idB) as idB from Buvette';
       $sth = $dbh->query($sql); 
       $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
       foreach ($result as $row){ 
@@ -227,7 +227,7 @@ if ($_POST['choix'] == 3) {
     </thead>
   <?php
   include_once('Connect.php'); 
-  $sql =  'SELECT idB, nomB, emplacement, responsable, nomV FROM buvette, volontaire WHERE buvette.responsable = volontaire.idv;';
+  $sql =  'SELECT idB, nomB, emplacement, responsable, nomV FROM Buvette, Volontaire WHERE Buvette.Responsable = Volontaire.idV;';
   $sth = $dbh->query($sql); 
   $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
   foreach ($result as $row) {
@@ -259,7 +259,7 @@ if ($_POST['choix'] == 3) {
       <td>
         <?php
         echo '<select class="form-control" name="responsable">';
-        $sql =  'SELECT idV, nomV FROM volontaire;';
+        $sql =  'SELECT idV, nomV FROM Volontaire;';
         $sth = $dbh->query($sql); 
         $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
         foreach ($result as $row) {

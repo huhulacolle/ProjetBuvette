@@ -4,7 +4,7 @@ function affichematch ($idM) {
 require'Connect.php';
 $i = 0;
 
-$sql = 'SELECT COUNT(idB) AS ddb from estouverte group by idM';
+$sql = 'SELECT COUNT(idB) AS ddb from EstOuverte group by idM';
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 foreach ($result as $row){ 
@@ -13,7 +13,7 @@ foreach ($result as $row){
 }
 
 $i = 0;
-$sql = 'SELECT count(DISTINCT idV) AS ddv FROM estpresent GROUP BY idM';
+$sql = 'SELECT count(DISTINCT idV) AS ddv FROM EstPresent GROUP BY idM';
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 foreach ($result as $row){ 
@@ -22,7 +22,7 @@ foreach ($result as $row){
 }
 
 $i = 0;
-$sql =  'SELECT dateM, e1.pays AS p1, e1.drapeau AS drapeau1, e2.pays AS p2, e2.drapeau AS drapeau2, scoreA, scoreB FROM matchs, equipe AS e1, equipe AS e2 WHERE matchs.eqA = e1.idE AND matchs.eqB = e2.idE';
+$sql =  'SELECT dateM, e1.pays AS p1, e1.drapeau AS drapeau1, e2.pays AS p2, e2.drapeau AS drapeau2, scoreA, scoreB FROM Matchs, Equipe AS e1, Equipe AS e2 WHERE Matchs.eqA = e1.idE AND Matchs.eqB = e2.idE';
 $sth = $dbh->query($sql); 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 echo '</br>'; echo '</br>'; 
@@ -62,7 +62,7 @@ $dbh=NULL;
 
 function TopVolon ($idV) {
 	require'Connect.php';
-$sql=('SELECT V.idV,Age,NomV,COUNT(DISTINCT idm) FROM estpresent P, VOLONTAIRE V WHERE V.IDV=P.IDV GROUP BY idV ORDER BY 4 DESC LIMIT 5;');
+$sql=('SELECT V.idV,Age,NomV,COUNT(DISTINCT idm) FROM EstPresent P, Volontaire V WHERE V.IDV=P.IDV GROUP BY idV ORDER BY 4 DESC LIMIT 5;');
    $sth = $dbh->query($sql);
    $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
    echo '<Table class="table">';
@@ -122,7 +122,7 @@ function StatMatch($idB) {
    }
    else
    {
-$sql='SELECT nomB , emplacement, nomV FROM estouverte, buvette, volontaire WHERE volontaire.idV = buvette.responsable AND buvette.idB = estouverte.idB AND idM='.$_POST['buvOpen'].'';
+$sql='SELECT nomB , emplacement, nomV FROM EstOuverte, Buvette, Volontaire WHERE Volontaire.idV = Buvette.responsable AND Buvette.idB = EstOuverte.idB AND idM='.$_POST['buvOpen'].'';
 $sth = $dbh->query($sql);
 $result = $sth->fetchAll(PDO::FETCH_ASSOC); 
 if ($result == NULL)
