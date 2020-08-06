@@ -11,7 +11,7 @@
 
 <body>
     <?php
-include_once('nav.php');
+include_once 'nav.php';
 ?>
     <br>
     <center>

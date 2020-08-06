@@ -11,14 +11,14 @@
 
 <body>
     <?php
-include_once('nav.php');
+include_once 'nav.php';
 ?>
     <br>
     <?php
 if (!empty($_POST['pass']) and $_POST['pass'] == "admins") {
 // si le visiteur a tapé le bon mot de passe dans le formulaire
-// alors la page normale s'affiche
-?>
+    // alors la page normale s'affiche
+    ?>
     <br>
     <center>
         <h4> <strong> Bienvenue sur la page d'administration </strong> </h4>
@@ -31,11 +31,11 @@ if (!empty($_POST['pass']) and $_POST['pass'] == "admins") {
     <?php } else {
     echo "<center>";
     echo " erreur de mot de passe ";
-?>
+    ?>
     <p> redirection dans 3 secondes</p>
     </center>
     <meta http-equiv="refresh" content="3; url=login.php">
-    <?php } ?>
+    <?php }?>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
