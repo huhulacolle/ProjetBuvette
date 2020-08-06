@@ -13,13 +13,10 @@
     <?php
 include_once 'nav.php';
 ?>
-    <br>
+    <br> <br>
     <?php
 if (!empty($_POST['pass']) and $_POST['pass'] == "admins") {
-// si le visiteur a tapé le bon mot de passe dans le formulaire
-    // alors la page normale s'affiche
     ?>
-    <br>
     <center>
         <h4> <strong> Bienvenue sur la page d'administration </strong> </h4>
         <form action="admin2.php" method="post">
@@ -28,14 +25,13 @@ if (!empty($_POST['pass']) and $_POST['pass'] == "admins") {
             <button type="submit" name="choix" value="3" class="btn btn-link">Buvette</button>
         </form>
     </center>
-    <?php } else {
-    echo "<center>";
-    echo " erreur de mot de passe ";
-    ?>
-    <p> redirection dans 3 secondes</p>
-    </center>
-    <meta http-equiv="refresh" content="3; url=login.php">
-    <?php }?>
+    <?php
+} else {
+    echo '<Script> alert("Mot de passe incorrect") </Script>';
+    echo '<meta http-equiv="refresh" content="0; url=login.php">';
+}
+?>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
