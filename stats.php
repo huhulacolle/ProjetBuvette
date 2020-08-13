@@ -21,7 +21,7 @@ include_once 'nav.php';
                 <div class="mx-auto" style="width: 500px;">
                     <table class="table table-borderless">
                         <tr>
-                            <td> <input type="radio" name="choix" value="0" /> </td>
+                            <td> <input type="radio" name="choix" value="0" checked/> </td>
                             <td> Les 5 volontaires les plus présents </td>
                         </tr>
                         <tr>

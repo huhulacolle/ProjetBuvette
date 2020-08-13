@@ -24,7 +24,7 @@ require 'fonctions.php';
 echo '<br>';
 echo '<div class="mx-auto" style="width: 600px;">';
 if ($_POST['choix'] == null) {
-    echo " <center> <h3> <strong> Erreur : aucune option n'a était saisi </strong> </h3> </center> ";
+    echo '<meta http-equiv="refresh" content="0; url=stats.php">';
 } else if ($_POST['choix'] == 0) {
     $idV = 0;
     TopVolon($idV);
