@@ -77,17 +77,10 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
                     <td>
-                        <input type="text" class="form-control" name="nomV">
+                        <input type="text" class="form-control" name="nomV" required>
                     </td>
                     <td>
-                        <?php
-echo '<select class="form-control" name="age">';
-    for ($i = 1; $i <= 150; $i++) {
-        echo "<option>";
-        echo $i;
-        echo "</option>";
-    }
-    ?>
+                        <input type="number" class="form-control" name="age" required>
                     </td>
                     <td colspan="2">
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
@@ -210,10 +203,10 @@ include_once 'Connect.php';
                         </div>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="scoreA">
+                        <input type="number" class="form-control" name="scoreA" required>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="scoreB">
+                        <input type="number" class="form-control" name="scoreB" required>
                     </td>
                     <td colspan="2">
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
@@ -284,10 +277,10 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
                     <td>
-                        <input type="text" class="form-control" name="nomB">
+                        <input type="text" class="form-control" name="nomB" required>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="emplacement">
+                        <input type="text" class="form-control" name="emplacement" required>
                     </td>
                     <td>
                         <?php
