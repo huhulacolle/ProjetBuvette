@@ -168,7 +168,7 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
                     <td>
-                        <input type="date" class="form-control" name="dateM">
+                        <input type="date" class="form-control" name="dateM" required>
                     </td>
                     <td>
                         <div class="form-group">
@@ -205,10 +205,10 @@ include_once 'Connect.php';
                         </div>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="scoreA" required>
+                        <input type="number" class="form-control" name="scoreA">
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="scoreB" required>
+                        <input type="number" class="form-control" name="scoreB">
                     </td>
                     <td colspan="2">
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>

@@ -23,7 +23,7 @@ echo '</form>';
     <form action="adminExe.php" method="post">
         <input type=hidden name="mod" value="Modifier">
         <input type=hidden name="choix" value=2>
-        <div class="mx-auto" style="width: 1200px;">
+        <div class="mx-auto" style="width: 1100px;">
 
             <table class="table table-borderless">
                 <tbody>
@@ -32,7 +32,7 @@ echo '</form>';
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col"> idV </th>
+                        <th scope="col"> idM </th>
                         <th scope="col"> dateM </th>
                         <th scope="col"> eqA </th>
                         <th scope="col"> eqB </th>
@@ -49,22 +49,26 @@ foreach ($result as $row) {
     echo '<tbody>';
     echo '<tr>';
     echo '<td>';
-    echo $row['idM'];
+    echo '<input type="text" class="form-control" value="' . $row['idM'] . '" readonly>';
     echo '</td>';
     echo '<td>';
-    echo '<input type="date" name="dateM" value = "' . $row['dateM'] . '">';
+    echo '<input type="date" class="form-control" name="dateM" value = "' . $row['dateM'] . '" required>';
     echo '</td>';
     echo '<td>';
-    echo '<input type="text" name="eqA" value = "' . $row['eqA'] . '">';
+    echo '<div id="eqA">';
+    echo '<input type="text" class="form-control" name="eqA" onclick="change_eqA()" value = "' . $row['eqA'] . '">';
+    echo '</div>';
     echo '</td>';
     echo '<td>';
-    echo '<input type="text" name="eqB" value = "' . $row['eqB'] . '">';
+    echo '<div id="eqB">';
+    echo '<input type="text" class="form-control" name="eqB" onclick="change_eqB()" value = "' . $row['eqB'] . '">';
+    echo '</div>';
     echo '</td>';
     echo '<td>';
-    echo '<input type="text" name="scoreA" value = "' . $row['scoreA'] . '">';
+    echo '<input type="text" class="form-control" name="scoreA" value = "' . $row['scoreA'] . '">';
     echo '</td>';
     echo '<td>';
-    echo '<input type="text" name="scoreB" value = "' . $row['scoreB'] . '">';
+    echo '<input type="text" class="form-control" name="scoreB" value = "' . $row['scoreB'] . '">';
     echo '</td>';
 }
 echo '<input type=hidden name="idM" value=' . $row['idM'] . '>';
@@ -72,6 +76,45 @@ echo '<input type=hidden name="idM" value=' . $row['idM'] . '>';
                 </tr>
                 </tbody>
             </Table>
+            <script>
+            function change_eqA() {
+                let elem = document.getElementById("eqA");
+                elem.innerHTML = '<?php
+                echo '<div class="form-group">';
+                echo '<select class="form-control" name="eqA">';
+
+                include_once 'Connect.php';
+                $sql = 'SELECT idE, pays FROM Equipe;';
+                $sth = $dbh -> query($sql);
+                $result = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $row) {
+                        echo '<option value="'.$row['pays'].
+                        '">';
+                        echo $row['pays'];
+                        echo '</option>';
+                    }
+                    ?> ';
+            }
+            function change_eqB() {
+                let elem = document.getElementById("eqB");
+                elem.innerHTML = '<?php
+                echo '<div class="form-group">';
+                echo '<select class="form-control" name="eqB">';
+
+                include_once 'Connect.php';
+                $sql = 'SELECT pays FROM Equipe;';
+                $sth = $dbh -> query($sql);
+                $result = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $row) {
+                        echo '<option value="'.$row['pays'].
+                        '">';
+                        echo $row['pays'];
+                        echo '</option>';
+                    }
+
+                    ?> ';
+            }
+            </script>
             <br>
             <div class="ml-auto" style="width:50px;">
                 <button type="submit" class="btn btn-primary mb-2">Modifier</button>

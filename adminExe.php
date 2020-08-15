@@ -22,7 +22,7 @@ switch ($_POST['choix']) {
         echo '</ul>';
         echo '</form>';
         if ($_POST['mod'] == "Inserer") {
-    
+
             include 'Connect.php';
             $sql = 'SELECT MAX(idV) as idV FROM Volontaire;';
             $sth = $dbh->query($sql);
@@ -30,12 +30,12 @@ switch ($_POST['choix']) {
             foreach ($result as $row) {
                 $max = $row['idV'];
             }
-    
+
             $max = $max + 1;
             $sql = 'Insert Into Volontaire (idV, nomV, age) Values (' . $max . ',"' . $_POST['nomV'] . '","' . $_POST['age'] . '");';
             $sth = $dbh->query($sql);
             echo '</div>';
-        } 
+        }
         ?>
     <form name="admin2" action="admin2.php" method="post">
         <input type="hidden" name="choix" value=1>
@@ -44,7 +44,7 @@ switch ($_POST['choix']) {
         </script>
     </form>
     <?php
-        break;
+break;
     case 2:
         echo '<form action="admin2.php" method="post">';
         echo '<ul class="nav">';
@@ -54,7 +54,7 @@ switch ($_POST['choix']) {
         echo '</ul>';
         echo '</form>';
         if ($_POST['mod'] == "Inserer") {
-    
+
             include 'Connect.php';
             $sql = 'SELECT MAX(idM) as idM FROM Matchs;';
             $sth = $dbh->query($sql);
@@ -62,7 +62,7 @@ switch ($_POST['choix']) {
             foreach ($result as $row) {
                 $max = $row['idM'];
             }
-    
+
             $max = $max + 1;
             $scoreA = $_POST['scoreA'];
             $scoreB = $_POST['scoreB'];
@@ -72,6 +72,8 @@ switch ($_POST['choix']) {
             if ($scoreB == null) {
                 $scoreB = "NULL";
             }
+
+            include 'Connect.php';
             $sql = 'Insert Into Matchs (idM, dateM, eqA, eqB, scoreA, scoreB) Values (' . $max . ',"' . $_POST['dateM'] . '","' . $_POST['eqA'] . '","' . $_POST['eqB'] . '",' . $scoreA . ',' . $scoreB . ');';
             $sth = $dbh->query($sql);
             echo '</div>';
@@ -86,11 +88,28 @@ switch ($_POST['choix']) {
             if ($scoreB == null) {
                 $scoreB = "NULL";
             }
-            
-            $sql = 'UPDATE Matchs SET dateM = "' . $_POST['dateM'] . '", eqA = "' . $_POST['eqA'] . '", eqB = "' . $_POST['eqB'] . '", scoreA = ' . $scoreA . ', scoreB = ' . $scoreB . ' WHERE idM = ' . $_POST['idM'] . '';
+
+            include 'Connect.php';
+            $sql = 'SELECT idE FROM Equipe WHERE pays = "' . $_POST['eqA'] . '"';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $row) {
+                $eqA = $row['idE'];
+            }
+
+            include 'Connect.php';
+            $sql = 'SELECT idE FROM Equipe WHERE pays = "' . $_POST['eqB'] . '"';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $row) {
+                $eqB = $row['idE'];
+            }
+
+            include 'Connect.php';
+            $sql = 'UPDATE Matchs SET dateM = "' . $_POST['dateM'] . '", eqA = "' . $eqA . '", eqB = "' . $eqB . '", scoreA = ' . $scoreA . ', scoreB = ' . $scoreB . ' WHERE idM = ' . $_POST['idM'] . '';
             $sth = $dbh->query($sql);
             echo '</div>';
-    
+
         }
         ?>
     <form name="admin2" action="admin2.php" method="post">
@@ -100,31 +119,31 @@ switch ($_POST['choix']) {
         </script>
     </form>
     <?php
-        break;
+break;
     case 3:
         echo '<form action="admin2.php" method="post">';
-    echo '<ul class="nav">';
-    echo '<li class="nav-item">';
-    echo '<button type="submit" name="choix" value="2" class="btn btn-link">Retour</button>';
-    echo '</li>';
-    echo '</ul>';
-    echo '</form>';
-    if ($_POST['mod'] == "Inserer") {
+        echo '<ul class="nav">';
+        echo '<li class="nav-item">';
+        echo '<button type="submit" name="choix" value="2" class="btn btn-link">Retour</button>';
+        echo '</li>';
+        echo '</ul>';
+        echo '</form>';
+        if ($_POST['mod'] == "Inserer") {
 
-        include 'Connect.php';
-        $sql = 'SELECT MAX(idB) as idB from Buvette';
-        $sth = $dbh->query($sql);
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            $max = $row['idB'];
+            include 'Connect.php';
+            $sql = 'SELECT MAX(idB) as idB from Buvette';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $row) {
+                $max = $row['idB'];
+            }
+
+            $max = $max + 1;
+            $sql = 'Insert Into Buvette (idB, nomB, emplacement, responsable ) Values (' . $max . ',"' . $_POST['nomB'] . '","' . $_POST['emplacement'] . '",' . $_POST['responsable'] . ')';
+            $sth = $dbh->query($sql);
+            echo '</div>';
         }
-        
-        $max = $max + 1;
-        $sql = 'Insert Into Buvette (idB, nomB, emplacement, responsable ) Values (' . $max . ',"' . $_POST['nomB'] . '","' . $_POST['emplacement'] . '",' . $_POST['responsable'] . ')';
-        $sth = $dbh->query($sql);
-        echo '</div>';
-        } 
-    ?>
+        ?>
     <form name="admin2" action="admin2.php" method="post">
         <input type="hidden" name="choix" value=3>
         <script>
@@ -132,9 +151,9 @@ switch ($_POST['choix']) {
         </script>
     </form>
     <?php
-        break;
+break;
     default:
-    ?>
+        ?>
     <form action="admin.php" method="post">
         <input type="hidden" name="pass" value="admins">
         <script>
@@ -142,7 +161,7 @@ switch ($_POST['choix']) {
         </script>
     </form>
     <?php
-        break;
+break;
 }
 
 ?>
