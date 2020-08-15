@@ -22,21 +22,22 @@ include_once 'nav.php';
     </form>
     <br>
     <?php
-if ($_POST['choix'] == 1) {
-    ?>
+switch ($_POST['choix']) {
+    case 1:
+        ?>
     <input type="hidden" name="choix" value=1>
     <?php
 include_once 'Connect.php';
-    $sql = 'SELECT MAX(idV) as idV from Volontaire';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        $max = $row['idV'];
-    }
-    $max++;
-    echo '<br>';
-    echo '<div class="mx-auto" style="width: 800px;">';
-    ?>
+        $sql = 'SELECT MAX(idV) as idV from Volontaire';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            $max = $row['idV'];
+        }
+        $max++;
+        echo '<br>';
+        echo '<div class="mx-auto" style="width: 800px;">';
+        ?>
     <Table class="table">
         <thead>
             <tr>
@@ -48,23 +49,23 @@ include_once 'Connect.php';
         </thead>
         <?php
 include_once 'Connect.php';
-    $sql = 'SELECT * FROM Volontaire';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<tbody>';
-        echo '<tr>';
-        echo '<td>';
-        echo $row['idV'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['nomV'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['age'];
-        echo '</td>';
-    }
-    ?>
+        $sql = 'SELECT * FROM Volontaire';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            echo '<td>';
+            echo $row['idV'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['nomV'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['age'];
+            echo '</td>';
+        }
+        ?>
         <form action="adminExe.php" method="post">
             <input type="hidden" name="choix" value="1">
             </tr>
@@ -72,7 +73,7 @@ include_once 'Connect.php';
                 <td>
                     <?php
 echo '<input type=text class="form-control" value="' . $max . '"readonly>';
-    ?>
+        ?>
                 </td>
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
@@ -91,23 +92,22 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
     </Table>
     </div>
     <?php
-}?>
-    <?php
-if ($_POST['choix'] == 2) {
-    ?>
+break;
+    case 2:
+        ?>
     <input type="hidden" name="choix" value=2>
     <?php
 include_once 'Connect.php';
-    $sql = 'SELECT MAX(idM) as idM from Matchs';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        $max = $row['idM'];
-    }
-    $max++;
-    echo '<br>';
-    echo '<div class="mx-auto" style="width: 1200px;">';
-    ?>
+        $sql = 'SELECT MAX(idM) as idM from Matchs';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            $max = $row['idM'];
+        }
+        $max++;
+        echo '<br>';
+        echo '<div class="mx-auto" style="width: 1200px;">';
+        ?>
     <Table class="table">
         <thead>
             <tr>
@@ -122,38 +122,40 @@ include_once 'Connect.php';
         </thead>
         <?php
 include_once 'Connect.php';
-    $sql = 'SELECT idM, dateM,  e1.pays AS eqA, e2.pays AS eqB, scoreA, scoreB FROM Matchs, Equipe AS e1, Equipe AS e2 WHERE Matchs.eqA = e1.idE AND Matchs.eqB = e2.idE;';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<tbody>';
-        echo '<tr>';
-        echo '<td>';
-        echo $row['idM'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['dateM'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['eqA'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['eqB'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['scoreA'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['scoreB'];
-        echo '</td>';
-        echo '<td>';
-        echo '<form action="AdminModif.php" method="post">';
-        echo '<input type=hidden name="choix" value=2>';
-        echo '<button type="submit" name="idM" value="' . $row['idM'] . '" class="btn btn-primary mb-2">Modifier</button>';
-        echo '</form>';
-        echo '</td>';
-    }
-    ?>
+        $sql = 'SELECT idM, dateM,  e1.pays AS eqA, e2.pays AS eqB, scoreA, scoreB FROM Matchs, Equipe AS e1, Equipe AS e2 WHERE Matchs.eqA = e1.idE AND Matchs.eqB = e2.idE;';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            echo '<td>';
+            echo $row['idM'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['dateM'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['eqA'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['eqB'];
+            echo ' </td>';
+            echo '
+        <td>';
+            echo $row['scoreA'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['scoreB'];
+            echo '</td>';
+            echo '<td>';
+            echo '<form action="AdminModif.php" method="post">';
+            echo '<input type=hidden name="choix" value=2>';
+            echo '<button type="submit" name="idM" value="' . $row['idM'] . '"
+                    class="btn btn-primary mb-2">Modifier</button>';
+            echo '</form>';
+            echo '</td>';
+        }
+        ?>
         <form action="adminExe.php" method="post">
             <input type="hidden" name="choix" value="2">
             </tr>
@@ -161,7 +163,7 @@ include_once 'Connect.php';
                 <td>
                     <?php
 echo '<input type=text class="form-control" value="' . $max . '"readonly>';
-    ?>
+        ?>
                 </td>
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
@@ -173,15 +175,15 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
                             <select class="form-control" name="eqA">
                                 <?php
 include_once 'Connect.php';
-    $sql = 'SELECT idE, pays FROM Equipe;';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<option value="' . $row['idE'] . '">';
-        echo $row['pays'];
-        echo '</option>';
-    }
-    ?>
+        $sql = 'SELECT idE, pays FROM Equipe;';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<option value="' . $row['idE'] . '">';
+            echo $row['pays'];
+            echo '</option>';
+        }
+        ?>
                             </select>
                         </div>
                     </td>
@@ -190,15 +192,15 @@ include_once 'Connect.php';
                             <select class="form-control" name="eqB">
                                 <?php
 include_once 'Connect.php';
-    $sql = 'SELECT idE, pays FROM Equipe;';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<option value="' . $row['idE'] . '">';
-        echo $row['pays'];
-        echo '</option>';
-    }
-    ?>
+        $sql = 'SELECT idE, pays FROM Equipe;';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<option value="' . $row['idE'] . '">';
+            echo $row['pays'];
+            echo '</option>';
+        }
+        ?>
                             </select>
                         </div>
                     </td>
@@ -216,23 +218,23 @@ include_once 'Connect.php';
             </tbody>
     </Table>
     </div>
-    <?php }?>
     <?php
-if ($_POST['choix'] == 3) {
-    ?>
+break;
+    case 3:
+        ?>
     <input type="hidden" name="choix" value=3>
     <?php
 include_once 'Connect.php';
-    $sql = 'SELECT MAX(idB) as idB from Buvette';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        $max = $row['idB'];
-    }
-    $max++;
-    echo '<br>';
-    echo '<div class="mx-auto" style="width: 800px;">';
-    ?>
+        $sql = 'SELECT MAX(idB) as idB from Buvette';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            $max = $row['idB'];
+        }
+        $max++;
+        echo '<br>';
+        echo '<div class="mx-auto" style="width: 800px;">';
+        ?>
     <Table class="table">
         <thead>
             <tr>
@@ -245,26 +247,26 @@ include_once 'Connect.php';
         </thead>
         <?php
 include_once 'Connect.php';
-    $sql = 'SELECT idB, nomB, emplacement, responsable, nomV FROM Buvette, Volontaire WHERE Buvette.Responsable = Volontaire.idV;';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<tbody>';
-        echo '<tr>';
-        echo '<td>';
-        echo $row['idB'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['nomB'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['emplacement'];
-        echo '</td>';
-        echo '<td>';
-        echo $row['nomV'];
-        echo '</td>';
-    }
-    ?>
+        $sql = 'SELECT idB, nomB, emplacement, responsable, nomV FROM Buvette, Volontaire WHERE Buvette.Responsable = Volontaire.idV;';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            echo '<td>';
+            echo $row['idB'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['nomB'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['emplacement'];
+            echo '</td>';
+            echo '<td>';
+            echo $row['nomV'];
+            echo '</td>';
+        }
+        ?>
         <form action="adminExe.php" method="post">
             <input type="hidden" name="choix" value=3>
             </tr>
@@ -272,7 +274,7 @@ include_once 'Connect.php';
                 <td>
                     <?php
 echo '<input type=text class="form-control" value="' . $max . '"readonly>';
-    ?>
+        ?>
                 </td>
                 <form action="adminExe.php">
                     <input type="hidden" name="mod" value="Inserer">
@@ -285,15 +287,15 @@ echo '<input type=text class="form-control" value="' . $max . '"readonly>';
                     <td>
                         <?php
 echo '<select class="form-control" name="responsable">';
-    $sql = 'SELECT idV, nomV FROM Volontaire;';
-    $sth = $dbh->query($sql);
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $row) {
-        echo '<option value="' . $row['idV'] . '">';
-        echo $row['nomV'];
-        echo "</option>";
-    }
-    ?>
+        $sql = 'SELECT idV, nomV FROM Volontaire;';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+            echo '<option value="' . $row['idV'] . '">';
+            echo $row['nomV'];
+            echo "</option>";
+        }
+        ?>
                     </td>
                     <td colspan="2">
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
@@ -303,7 +305,20 @@ echo '<select class="form-control" name="responsable">';
             </tbody>
     </Table>
     </div>
-    <?php }?>
+    <?php
+break;
+    default:
+        ?>
+    <form action="admin.php" method="post">
+        <input type="hidden" name="pass" value="admins">
+        <script>
+        setTimeout("document.forms['admin'].submit()", 0);
+        </script>
+    </form>
+    <?php
+break;
+}
+?>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
