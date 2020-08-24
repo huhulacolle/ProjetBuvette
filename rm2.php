@@ -31,7 +31,7 @@ if ($_POST['choix'] == 1) {
                         <td>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Age Minimal :</label>
-                                <input type="number" class="form-control" name="amin">
+                                <input type="number" class="form-control" name="amin" required>
                                 </select>
                             </div>
                         </td>
@@ -41,7 +41,7 @@ if ($_POST['choix'] == 1) {
                         <td>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Age Maximal :</label>
-                                <input type="number" class="form-control" name="amax">
+                                <input type="number" class="form-control" name="amax" required>
                                 </select>
                             </div>
     </div>
@@ -72,7 +72,7 @@ if ($_POST['choix'] == 2) {
                                             <div class="form-group">
                                                 <label for="formGroupExampleInput">Nom de famille :</label>
                                                 <input type="text" class="form-control" name="nomV"
-                                                    placeholder="Lindgren">
+                                                    placeholder="Lindgren" required>
                                             </div>
                                         </td>
                                         <td>
@@ -105,7 +105,7 @@ if ($_POST['choix'] == 3) {
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">Participations <br> minimal
                                                     :</label>
-                                                <input type="number" class="form-control" name="particip">
+                                                <input type="number" class="form-control" name="particip" required>
                                             </div>
                                 </tbody>
                             </table>
