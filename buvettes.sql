@@ -16,7 +16,8 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table Buvette
 --
-
+CREATE DATABASE buvettes;
+USE buvettes;
 CREATE TABLE Buvette 
 (
   idB int(11) NOT NULL,
