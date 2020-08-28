@@ -1,6 +1,6 @@
 <?php
-$user = 'root';
-$pass = '';
+$user = 'test';
+$pass = 'test';
 // Data Source Name
 $dsn = 'mysql:host=localhost; dbname=buvettes';
 try { //tentative de connexion : on crée un objet de la classe PDO
