@@ -19,7 +19,7 @@ include_once('nav.php');
         </li>
     </ul>
     <br>
-    <div class="mx-auto" style="width: 500px;">
+    <div class="mx-auto" style="width: 700px;">
         <form action="rmExe.php" method="post">
             <?php
 if ($_POST['choix'] == 1) {
@@ -46,12 +46,13 @@ if ($_POST['choix'] == 1) {
                             </div>
     </div>
     </td>
-    </tr>
+     <td>
+     <div class="ml-auto" style="width:400px;">
+        <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
+     </td>
+     </tr>
     </tbody>
     </table>
-    </div>
-    <div class="ml-auto" style="width:400px;">
-        <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
     </div>
     <?php } ?>
     <?php
