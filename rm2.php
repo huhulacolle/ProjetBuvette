@@ -11,7 +11,7 @@
 
 <body>
     <?php
-include_once('nav.php');
+include_once 'nav.php';
 ?>
     <ul class="nav">
         <li class="nav-item">
@@ -20,7 +20,7 @@ include_once('nav.php');
     </ul>
     <br>
     <div class="mx-auto" style="width: 700px;">
-        <form action="rmExe.php" method="post">
+        <form action="rm2.php" method="post">
             <?php
 if ($_POST['choix'] == 1) {
     ?>
@@ -46,15 +46,52 @@ if ($_POST['choix'] == 1) {
                             </div>
     </div>
     </td>
-     <td>
-     <div class="ml-auto" style="width:400px;">
-        <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
-     </td>
-     </tr>
+    <td>
+        <div class="ml-auto" style="width:400px;">
+            <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
+    </td>
+    </tr>
     </tbody>
     </table>
     </div>
-    <?php } ?>
+    <?php
+if (isset($_POST['amin'])) {
+
+        include 'Connect.php';
+        if ($_POST['amin'] > $_POST['amax']) {
+            echo '<br> <br> <br> <br> <br> <br>';
+            echo "<center> <h2><strong> Erreur : </strong> Âge Maximal inferieur à l'âge minimal </h2> </center>";
+
+        } else {
+            $sql = 'SELECT DISTINCT V.nomV FROM Buvette, EstPresent
+    E INNER JOIN Volontaire V ON E.idV = V.idV
+    and age between ' . $_POST['amin'] . ' and ' . $_POST['amax'] . '';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            if ($result == null) {
+                echo '<br> <br> <br> <br> <br> <br>';
+                echo "<center> <h2> Aucune personne n'a été trouvée </h2> </center>";
+            } else {
+                echo '<br>';
+                echo '<center>';
+                echo '<h4>  les personnes que vous cherchez sont : </h4>';
+                echo '</center>';
+                foreach ($result as $row) {
+
+                    echo '<br>';
+                    echo '<center>';
+                    echo '<h3>';
+                    echo '<strong>';
+                    echo $row['nomV'];
+                    echo '</strong>';
+                    echo '</h3>';
+                    echo '</center>';
+                }
+            }
+        }
+        echo '</div>';
+    }
+}?>
     <?php
 if ($_POST['choix'] == 2) {
     ?>
@@ -88,7 +125,42 @@ if ($_POST['choix'] == 2) {
         </tbody>
     </table>
     </div>
-    <?php } ?>
+    <?php
+if (isset($_POST['nomV'])) {
+        include 'Connect.php';
+        $sql = 'SELECT DISTINCT V.nomV FROM Buvette, EstPresent
+        E INNER JOIN Volontaire V ON E.idV = V.idV
+        WHERE nomV like "%' . $_POST['nomV'] . '"';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if ($_POST['nomV'] == null) {
+            echo '<br> <br> <br> <br> <br> <br>';
+            echo "<center> <h2> Vous avez oublié de marquer un nom </h2> </center>";
+        } else if ($result == null) {
+            echo '<br> <br> <br> <br> <br> <br>';
+            echo "<center> <h2> Aucune personne n'a été trouvée </h2> </center>";
+        } else {
+            echo '<br>';
+            echo '<center>';
+            echo '<h4>  les personnes que vous cherchez sont : </h4>';
+            echo '</center>';
+            foreach ($result as $row) {
+
+                echo '<br>';
+                echo '<center>';
+                echo '<h3>';
+                echo '<strong>';
+                echo $row['nomV'];
+                echo '</strong>';
+                echo '</h3>';
+                echo '</center>';
+            }
+        }
+
+        $dbh = null;
+        echo '</div>';
+    }
+}?>
     <?php
 if ($_POST['choix'] == 3) {
     ?>
@@ -114,7 +186,35 @@ if ($_POST['choix'] == 3) {
                     <div class="ml-auto" style="width:400px;">
                         <button type="submit" class="btn btn-primary mb-2">Validation</button>
                     </div>
-                    <?php } ?>
+                    <?php
+if (isset($_POST['particip'])) {
+        include 'Connect.php';
+        $sql = 'SELECT distinct V.nomV AS Vnom FROM EstPresent E INNER JOIN Volontaire V ON E.idV = V.idV GROUP BY E.idV HAVING COUNT(idB) >= ' . $_POST['particip'] . '';
+        $sth = $dbh->query($sql);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if ($result == null) {
+            echo '<br> <br> <br> <br> <br> <br>';
+            echo "<center> <h2> Aucune personne n'a été trouvée </h2> </center>";
+        } else {
+            echo '<br>';
+            echo '<center>';
+            echo '<h4>  les personnes que vous cherchez sont : </h4>';
+            echo '</center>';
+            foreach ($result as $row) {
+
+                echo '<br>';
+                echo '<center>';
+                echo '<h3>';
+                echo '<strong>';
+                echo $row['Vnom'];
+                echo '</strong>';
+                echo '</h3>';
+                echo '</center>';
+            }
+        }
+        echo '</div>';
+    }
+}?>
                     <?php
 if ($_POST['choix'] == 4) {
     ?>
@@ -136,33 +236,30 @@ if ($_POST['choix'] == 4) {
                                                                             <tr>
                                                                                 <td>
                                                                                     <p> A-t-il déjà été responsable
-                                                                                        d'une buvette ? <p>
-                                                                                            <div class="form-check">
-                                                                                                <input
-                                                                                                    class="form-check-input"
-                                                                                                    type="radio"
-                                                                                                    name="particip"
-                                                                                                    id="exampleRadios1"
-                                                                                                    value="1" checked>
-                                                                                                <label
-                                                                                                    class="form-check-label"
-                                                                                                    for="exampleRadios1">
-                                                                                                    Oui
-                                                                                                </label>
-                                                                                            </div>
-                                                                                            <div class="form-check">
-                                                                                                <input
-                                                                                                    class="form-check-input"
-                                                                                                    type="radio"
-                                                                                                    name="particip"
-                                                                                                    id="exampleRadios1"
-                                                                                                    value="=0" checked>
-                                                                                                <label
-                                                                                                    class="form-check-label"
-                                                                                                    for="exampleRadios1">
-                                                                                                    Non
-                                                                                                </label>
-                                                                                            </div>
+                                                                                        d'une buvette ?
+                                                                                    <p>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="radio"
+                                                                                            name="particip2"
+                                                                                            id="exampleRadios1"
+                                                                                            value="1" checked>
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleRadios1">
+                                                                                            Oui
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="radio"
+                                                                                            name="particip2"
+                                                                                            id="exampleRadios1"
+                                                                                            value="=0" checked>
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleRadios1">
+                                                                                            Non
+                                                                                        </label>
+                                                                                    </div>
                                                                         </tbody>
                                                                     </table>
                                                             </div>
@@ -170,7 +267,64 @@ if ($_POST['choix'] == 4) {
                                                                 <button type="submit"
                                                                     class="btn btn-primary mb-2">Validation</button>
                                                             </div>
-                                                            <?php } ?>
+                                                            <?php
+if (isset($_POST['particip2'])) {
+        if ($_POST['particip2'] == 1) {
+            include 'Connect.php';
+            $sql = 'SELECT nomV FROM Volontaire, Buvette WHERE Volontaire.idV = Buvette.responsable GROUP BY nomV;';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            if ($result == null) {
+                echo '<br> <br> <br> <br> <br> <br>';
+                echo "<center> <h2> Aucune personne n'a été trouvée </h2> </center>";
+            } else {
+                echo '<br>';
+                echo '<center>';
+                echo '<h4>  les personnes que vous cherchez sont : </h4>';
+                echo '</center>';
+                foreach ($result as $row) {
+
+                    echo '<br>';
+                    echo '<center>';
+                    echo '<h3>';
+                    echo '<strong>';
+                    echo $row['nomV'];
+                    echo '</strong>';
+                    echo '</h3>';
+                    echo '</center>';
+                }
+            }
+        } else {
+            include 'Connect.php';
+            $sql = 'SELECT DISTINCT t1.nomV as "nomV" FROM Volontaire t1 LEFT JOIN Buvette t2 ON t2.responsable = t1.idV WHERE t2.responsable IS NULL';
+            $sth = $dbh->query($sql);
+            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+            if ($result == null) {
+                echo '<br> <br> <br> <br> <br> <br>';
+                echo "<center> <h2> Aucune personne n'a été trouvée </h2> </center>";
+            } else {
+                echo '<br>';
+                echo '<center>';
+                echo '<h4>  les personnes que vous cherchez sont : </h4>';
+                echo '</center>';
+                foreach ($result as $row) {
+
+                    echo '<br>';
+                    echo '<center>';
+                    echo '<h3>';
+                    echo '<strong>';
+                    echo $row['nomV'];
+                    echo '</strong>';
+                    echo '</h3>';
+                    echo '</center>';
+                }
+            }
+        }
+        $dbh = null;
+        echo '</div>';
+    }
+
+}?>
                                         </form>
                                         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                                             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
